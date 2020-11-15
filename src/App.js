@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useEffect, useState} from 'react';
+import Axios from 'axios';
 
-function App() {
+const App = () => {
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    // Get 6 random categories, save to an array
+    const categories = [];
+    Axios.get(`https://jservice.io/api/categories?count=100`)
+    .then(response => {
+      for (let i = 1; i <= 6; i++) {
+        categories.push(response.data.splice(Math.floor(Math.random() * response.data.length), 1)[0]);
+      }
+      console.log(categories);
+    });
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
     </div>
   );
 }
