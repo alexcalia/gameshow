@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-const Question = ({question}) => {
-  const [input, setInput] = useState("");
-
+const Question = ({question, openQuestion}) => {
   return(
     question && 
       <div className="questionInfo">
         <p>{question.category}</p>
         {question.questions.map(question => {
-          return <button key={question.id}>{question.value}</button>
+          return <button key={question.id} onClick={openQuestion(question)}>{question.value}</button>
         })}
     </div>
   )

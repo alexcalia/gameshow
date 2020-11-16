@@ -6,8 +6,20 @@ import Question from './Question';
 const App = () => {
   const [questionsOne, setQuestionsOne] = useState([]);
   const [questionsTwo, setQuestionsTwo] = useState([]);
+  const [questionOpen, setQuestionOpen] = useState(false);
+  const [question, setQuestion] = useState();
   const [round, setRound] = useState(0);
   const [score, setScore] = useState(1000);
+
+  const openQuestion = (question) => {
+    setQuestion(question);
+    setQuestionOpen(true);
+  }
+
+  const closeQuestion = () => {
+    setQuestion({});
+    setQuestionOpen(false);
+  }
 
   useEffect(() => {
     // Get 6 random categories, save to an array
@@ -56,11 +68,11 @@ const App = () => {
       ? <p>Get Ready</p>
       : round === 1
         ?questionsOne.map(question => {
-          return <Question question={question} />
+          return <Question question={question} openQuestion={openQuestion}/>
         })
       : round >= 2
         ? questionsTwo.map(question => {
-          return <Question question={question} />
+          return <Question question={question} openQuestion={openQuestion}/>
         })
       : null}
     </div>
