@@ -6,7 +6,7 @@ import Question from './Question';
 const App = () => {
   const [questionsOne, setQuestionsOne] = useState([]);
   const [questionsTwo, setQuestionsTwo] = useState([]);
-  const [round, setRound] = useState(1);
+  const [round, setRound] = useState(0);
   const [score, setScore] = useState(1000);
 
   useEffect(() => {
@@ -46,22 +46,23 @@ const App = () => {
     const interval = setInterval(() => {
       const newRound = round + 1;
       setRound(newRound);
-    }, 1000);
+    }, 10000);
     return () => clearInterval(interval)
   }, [round]);
 
   return (
     <div className="App">
-    {questionsOne.map(question => {
-      return(
-        <div className="questionInfo">
-          <p>{question.category}</p>
-          {question.questions.map(question => {
-            return <Question question={question}/>
-          })}
-        </div>
-      )
-    })}
+      { round === 0
+      ? <p>Get Ready</p>
+      : round === 1
+        ?questionsOne.map(question => {
+          return <Question question={question} />
+        })
+      : round >= 2
+        ? questionsTwo.map(question => {
+          return <Question question={question} />
+        })
+      : null}
     </div>
   );
 }

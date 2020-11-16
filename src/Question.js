@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
-import QuestionBox from './QuestionBox';
 
 const Question = ({question}) => {
   const [input, setInput] = useState("");
 
   return(
-    <div className="question">
-      <p>{question.value}</p>
+    question && 
+      <div className="questionInfo">
+        <p>{question.category}</p>
+        {question.questions.map(question => {
+          return <button key={question.id}>{question.value}</button>
+        })}
     </div>
   )
 }
