@@ -1,11 +1,13 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
 import Axios from 'axios';
+import Question from './Question';
 
 const App = () => {
   const [questionsOne, setQuestionsOne] = useState([]);
   const [questionsTwo, setQuestionsTwo] = useState([]);
   const [round, setRound] = useState(1);
+  const [score, setScore] = useState(1000);
 
   useEffect(() => {
     // Get 6 random categories, save to an array
@@ -50,7 +52,16 @@ const App = () => {
 
   return (
     <div className="App">
-    
+    {questionsOne.map(question => {
+      return(
+        <div className="questionInfo">
+          <p>{question.category}</p>
+          {question.questions.map(question => {
+            return <Question question={question}/>
+          })}
+        </div>
+      )
+    })}
     </div>
   );
 }
