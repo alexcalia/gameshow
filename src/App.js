@@ -5,6 +5,7 @@ import Axios from 'axios';
 const App = () => {
   const [questionsOne, setQuestionsOne] = useState([]);
   const [questionsTwo, setQuestionsTwo] = useState([]);
+  const [round, setRound] = useState(1);
 
   useEffect(() => {
     // Get 6 random categories, save to an array
@@ -38,6 +39,14 @@ const App = () => {
     setQuestionsOne(questionSetOne);
     setQuestionsTwo(questionSetTwo);
   },[]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newRound = round + 1;
+      setRound(newRound);
+    }, 1000);
+    return () => clearInterval(interval)
+  }, [round]);
 
   return (
     <div className="App">
