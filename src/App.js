@@ -1,7 +1,6 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
 import Axios from 'axios';
-import Question from './Question';
 
 const App = () => {
   const [questionsOne, setQuestionsOne] = useState([]);
@@ -64,6 +63,14 @@ const App = () => {
 
   return (
     <div className="App">
+      {questionOpen && 
+        <div className="questionBox">
+          <p>{question.question}</p>
+          <label for="answerInput"></label>
+          <input className="answerInput" id="answerInput"></input>
+          <button className="answerSubmit" onClick={() => closeQuestion()}>Submit</button>
+        </div>
+      }
       { round === 0
       ? <p>Get Ready</p>
       : round === 1

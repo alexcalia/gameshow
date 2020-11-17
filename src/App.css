@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.questionBox {
+  background: black;
+  color: white;
+  position: absolute;
+  top: 400px;
+  right: 1000px;
+}
