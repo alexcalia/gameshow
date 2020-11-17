@@ -67,12 +67,25 @@ const App = () => {
       { round === 0
       ? <p>Get Ready</p>
       : round === 1
-        ?questionsOne.map(question => {
-          return <Question question={question} openQuestion={openQuestion}/>
+        ?questionsOne.map((question, questionIndex) => {
+        return (
+          <div className="questions">
+            <p>{question.category}</p>
+            {question.questions.map((question, index) => {
+              return <button key={question.id} onClick={() => openQuestion(questionsOne[questionIndex].questions[index])}>{question.value}</button>
+            })}
+          </div>)
         })
       : round >= 2
-        ? questionsTwo.map(question => {
-          return <Question question={question} openQuestion={openQuestion}/>
+        ? questionsOne.map((question, questionIndex) => {
+          console.log(question);
+        return (
+          <div className="questions">
+            <p>{question.category}</p>
+            {question.questions.map((question, index) => {
+              return <button key={question.id} onClick={() => openQuestion(questionsTwo[questionIndex].questions[index])}>{question.value}</button>
+            })}
+          </div>)
         })
       : null}
     </div>
